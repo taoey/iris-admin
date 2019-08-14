@@ -16,3 +16,15 @@ IRIS（go语言web框架）脚手架项目
 - [ ] 日志系统
 - [ ] REST风格
 - [ ] 模板引擎风格
+- [ ] 定时任务
+- [ ] 文件上传
+- [ ] csv文件处理
+- [ ] 配置文件读取
+
+
+
+### 相关主要依赖库
+
+- Mongo连接：gopkg.in/mgo.v2
+- config配置读取 ：github.com/olebedev/config 
+- 

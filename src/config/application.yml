@@ -7,3 +7,6 @@ server:
 # redis 配置
 
 # MongoDB配置
+mongodb:
+  url: 127.0.0.1:27017
+  pool_limit: 200
