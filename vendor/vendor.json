@@ -57,6 +57,12 @@
 			"revisionTime": "2018-03-22T19:33:09Z"
 		},
 		{
+			"checksumSHA1": "xPhDDswCyILkZwdPdHGGNryPmS4=",
+			"path": "github.com/bamzi/jobrunner",
+			"revision": "852b7ca4d475a62a2c6f1e4bf6e1d458e2d6ae0f",
+			"revisionTime": "2019-08-10T14:41:13Z"
+		},
+		{
 			"checksumSHA1": "G7vV+BdLahQWl/i+Ynvyw0EvN50=",
 			"path": "github.com/chris-ramon/douceur/css",
 			"revision": "f3463056cd52886eda904655e1940157bf323bd7",
@@ -457,6 +463,12 @@
 			"path": "gopkg.in/mgo.v2/internal/scram",
 			"revision": "9856a29383ce1c59f308dd1cf0363a79b5bef6b5",
 			"revisionTime": "2018-07-05T11:36:04Z"
+		},
+		{
+			"checksumSHA1": "syh6w6cViPsQKL1b0rvQs2KU6ZI=",
+			"path": "gopkg.in/robfig/cron.v3",
+			"revision": "45fbe1491cdd47d74d1bf1396286d67faee8b8b5",
+			"revisionTime": "2019-07-11T16:53:50Z"
 		},
 		{
 			"checksumSHA1": "oNqPrS2edE8peI3ah2INe379k8E=",
