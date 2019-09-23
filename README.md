@@ -21,10 +21,12 @@ IRIS（go语言web框架）脚手架项目
 - [ ] csv文件处理
 - [ ] 配置文件读取
 
+### 使用说明
+#### 1.项目名配置
+在go.mod 中修改第一行中的项目名称，再使用ctrl+shift+r(goland环境下)进行全局替换
 
 
 ### 相关主要依赖库
 
 - Mongo连接：gopkg.in/mgo.v2
 - config配置读取 ：github.com/olebedev/config 
-- 
