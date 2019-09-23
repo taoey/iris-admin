@@ -1,7 +1,7 @@
 package myinit
 
 import (
-	"IRIS-start/src/system/job"
+	"github.com/Taoey/iris-cli/src/system/job"
 	"github.com/bamzi/jobrunner"
 )
 
