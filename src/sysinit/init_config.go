@@ -1,4 +1,4 @@
-package myinit
+package sysinit
 
 import (
 	"github.com/olebedev/config"

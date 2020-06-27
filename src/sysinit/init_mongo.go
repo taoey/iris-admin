@@ -1,4 +1,4 @@
-package myinit
+package sysinit
 
 import (
 	"gopkg.in/mgo.v2"

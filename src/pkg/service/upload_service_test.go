@@ -1,4 +1,4 @@
-package myservice
+package service
 
 import "testing"
 
@@ -16,7 +16,7 @@ func TestUploadAliBillPrint(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			UploadAliBillPrint(tt.args.str)
+			OnUploadAliBillPrint(tt.args.str)
 		})
 	}
 }
