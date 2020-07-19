@@ -19,6 +19,7 @@ func IndexHelloJson(ctx iris.Context) {
 	}
 	bytes, _ := json.Marshal(s)
 	fmt.Println(string(bytes))
+	ctx.JSON(s)
 }
 
 // 变量名称必须大写否则转化json的时候不能进行转化
