@@ -39,11 +39,16 @@ func SetRoutes() {
 	App.Get("/hello_json", HttpLimithandler, api.IndexHelloJson)
 
 	//根API
-	RootApi := App.Party("api/")
+	RootApi := App.Party("api/v1")
 
 	// upload
 	RootApi.Post("/upload/ali_bill", iris.LimitRequestBodySize(5<<20), api.UploadAliBill)
 
+	//download
+	RootApi.Get("/download/demo1", api.ApiDownloadDemo1)
+	RootApi.Get("/download/demo2", api.ApiDownloadDemo2)
+	RootApi.Get("/download/demo3", api.ApiDownloadDemo3)
+	RootApi.Get("/download/demo4", api.ApiDownloadLimite)
 }
 
 // 设置HTTP限流器
