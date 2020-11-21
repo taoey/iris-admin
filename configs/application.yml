@@ -10,3 +10,10 @@ server:
 mongodb:
   url: :27017
   pool_limit: 200
+
+# Mysql配置
+mysql:
+  open: false
+  url: root:123456@tcp(127.0.0.1:3306)/hotsearch?charset=utf8&parseTime=true&loc=Local #url格式：⽤户名:密码@(IP:端口)/数据库名称？编码⽅式
+  max_idle: 10  # 空闲最大连接数
+  max_open: 100 # 最大连接数

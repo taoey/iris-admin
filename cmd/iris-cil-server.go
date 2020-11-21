@@ -17,8 +17,9 @@ var HttpLimithandler iris.Handler
 func main() {
 	// 初始化
 	sysinit.InitConf()
-	//myinit.InitMongo()
-	//myinit.InitQuartz()
+	//sysinit.InitMongo()
+	//sysinit.InitQuartz()
+	sysinit.InitMysql()
 
 	// 初始化App
 	App = iris.New()
