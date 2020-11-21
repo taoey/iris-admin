@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/Taoey/iris-cli/src/pkg/api"
-	"github.com/Taoey/iris-cli/src/sysinit"
+	"github.com/Taoey/iris-cli/pkg/api"
+	"github.com/Taoey/iris-cli/pkg/sysinit"
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
 	"github.com/kataras/iris"
@@ -17,9 +17,11 @@ var HttpLimithandler iris.Handler
 func main() {
 	// 初始化
 	sysinit.InitConf()
+
+	sysinit.InitLogger()
 	//sysinit.InitMongo()
 	//sysinit.InitQuartz()
-	sysinit.InitMysql()
+	//sysinit.InitMysql()
 
 	// 初始化App
 	App = iris.New()
