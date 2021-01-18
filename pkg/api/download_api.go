@@ -55,15 +55,26 @@ func SendURLFile(ctx iris.Context) {
 
 // 使用令牌桶限速下载
 func ApiDownloadLimite(ctx iris.Context) {
-	//
+	defer func() {
+		fmt.Println("download limit closed")
+	}()
+	// 断点续传
+	request := ctx.Request()
+	var start, end int64
+	fmt.Sscanf(request.Header.Get("Range"), "bytes=%d-%d", &start, &end)
+	fmt.Println(start, end)
+
 	//filedir :="./files/"
 	//filename := "android-studio-ide-191.5791312-windows.exe"
 	//filepath := filedir + filename
-	filename := "getfusion_temp.dmg"
-	filepath := "/Users/tao/Downloads/getfusion.dmg"
+	filename := "data.txt"
+	//filepath := "./files/data.txt"
+	filepath := `G:\softdata\os\ubuntu-18.04.3-desktop-amd64.iso`
 
-	var downloadSpeed float64 = 1024 * 1024 * 1
-	var takeTokenCount int64 = 200
+	//var downloadSpeed float64 = 1024 * 1024 * 1 //下载速度 1MB/s
+	var downloadSpeed float64 = 100 * 1 * 1
+	var takeTokenCount int64 = 100
+	var timeOut int64 = 1000 * 60 // 设置超时时间 60s
 
 	f, _ := os.Open(filepath)
 	defer f.Close()
@@ -72,29 +83,82 @@ func ApiDownloadLimite(ctx iris.Context) {
 
 	ctx.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
 
-	current := 0
-	bucket := ratelimit.NewBucketWithRate(downloadSpeed, 10000) //下载速度 1MB/s
+	current := start
+	bucket := ratelimit.NewBucketWithRate(downloadSpeed, 10000)
 
 	// 下载监控
-	go func() {
-		for {
-			fmt.Println(bucket.Available(), current, len(data), current/len(data)*100)
-			time.Sleep(time.Millisecond * 200)
-		}
-	}()
-
-	var timeOut int64 = 1000 * 60 // 设置超时时间 60s
+	//go func() {
+	//	for {
+	//		fmt.Println(bucket.Available(), current, len(data), current/len(data)*100)
+	//		time.Sleep(time.Millisecond * 200)
+	//	}
+	//}()
 
 	startTime := time.Now().UnixNano() / 1e6
-	for current < len(data) {
+	for current < end && current < int64(len(data)) {
 		currentTime := time.Now().UnixNano() / 1e6
 		if currentTime-startTime <= timeOut {
 			bucket.Wait(takeTokenCount)
-			ctx.ResponseWriter().Write(data[current : current+int(takeTokenCount)])
-			current = current + int(takeTokenCount)
+			//TODO 该处下载有问题可能会造成异常 目测cap容量比len容量大很多，不必担心
+			//fmt.Println(len(data),cap(data),current,current+int64(takeTokenCount),data[current : current+int64(takeTokenCount)])
+			ctx.ResponseWriter().Write(data[current : current+int64(takeTokenCount)])
+			current = current + int64(takeTokenCount)
 		} else {
 			ctx.ResponseWriter().CloseNotify()
 			return
 		}
 	}
+}
+
+// 使用sleep限速下载 : 测试不通过
+func ApiDownloadLimiteSleep(ctx iris.Context) {
+
+	//filedir :="./files/"
+	//filename := "android-studio-ide-191.5791312-windows.exe"
+	//filepath := filedir + filename
+	filename := "data.txt"
+	filepath := "./files/data.txt"
+
+	//var downloadSpeed float64 = 1024 * 1024 * 1 //下载速度 1MB/s
+	var takeTokenCount = 100
+	var timeOut int64 = 1000 * 30 // 设置超时时间 60s
+
+	f, _ := os.Open(filepath)
+	defer f.Close()
+
+	data, _ := ioutil.ReadAll(f)
+
+	ctx.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
+
+	// 下载监控
+	//go func() {
+	//	for {
+	//		fmt.Println(bucket.Available(), current, len(data), current/len(data)*100)
+	//		time.Sleep(time.Millisecond * 200)
+	//	}
+	//}()
+
+	current := 0
+	startTime := time.Now().UnixNano() / 1e6
+	for current < len(data) {
+		time.Sleep(time.Second * 1)
+		currentTime := time.Now().UnixNano() / 1e6
+		if currentTime-startTime <= timeOut {
+			//TODO 该处下载有问题可能会造成异常 目测cap容量比len容量大很多，不必担心
+			fmt.Println(len(data), cap(data), current, current+takeTokenCount, data[current:current+takeTokenCount])
+			ctx.ResponseWriter().Write(data[current : current+takeTokenCount])
+			current = current + takeTokenCount
+		} else {
+			ctx.ResponseWriter().CloseNotify()
+			return
+		}
+	}
+}
+
+func ApiDownloadDemo6(ctx iris.Context) {
+	defer func() {
+		fmt.Println("download6 closed")
+	}()
+	filepath := `G:\softdata\os\ubuntu-18.04.3-desktop-amd64.iso`
+	ctx.SendFile(filepath, "ubuntu-18.04.3-desktop-amd64.iso")
 }
