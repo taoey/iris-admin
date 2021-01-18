@@ -1,4 +1,4 @@
-package entity
+package resp
 
 import (
 	"fmt"

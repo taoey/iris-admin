@@ -3,10 +3,14 @@ package main
 import (
 	"fmt"
 	"github.com/Taoey/iris-cli/pkg/api"
+	"github.com/Taoey/iris-cli/pkg/service/auth"
+	"github.com/Taoey/iris-cli/pkg/service/test"
+	"github.com/Taoey/iris-cli/pkg/service/user"
 	"github.com/Taoey/iris-cli/pkg/sysinit"
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
 	"github.com/kataras/iris"
+	"github.com/kataras/iris/middleware/recover"
 	"log"
 )
 
@@ -15,18 +19,19 @@ var HttpLimithandler iris.Handler
 
 //程序入口
 func main() {
+	// 初始化App
+	App = iris.New()
+
 	// 初始化
 	sysinit.InitConf()
-
+	SetMiddleware()
 	sysinit.InitLogger()
+	auth.InitSession()
+
 	//sysinit.InitMongo()
 	//sysinit.InitQuartz()
 	//sysinit.InitMysql()
 
-	// 初始化App
-	App = iris.New()
-
-	SetHttpLimiter()
 	SetRoutes()
 
 	// 启动
@@ -52,6 +57,17 @@ func SetRoutes() {
 	RootApi.Get("/download/demo2", api.ApiDownloadDemo2)
 	RootApi.Get("/download/demo3", api.ApiDownloadDemo3)
 	RootApi.Get("/download/demo4", api.ApiDownloadLimite)
+	RootApi.Get("/download/demo5", api.ApiDownloadLimiteSleep)
+	RootApi.Get("/download/demo6", api.ApiDownloadDemo6)
+	RootApi.Post("/test/map_parms", test.MapParmsHandler)
+
+	// 用户登录登出
+	RootApi.Post("/user/login", user.UserLoginHandler)
+	RootApi.Get("/user/current", user.UserCurrentHandler)
+	RootApi.Get("/user/logout", user.UserLogoutHandler)
+
+	// 测试
+	RootApi.Get("/test/error/zero", test.ErrorHandler)
 }
 
 // 设置HTTP限流器
@@ -78,4 +94,11 @@ func LimitHandler(lmt *limiter.Limiter) iris.Handler {
 
 		ctx.Next()
 	}
+}
+
+func SetMiddleware() {
+	// 设置未知异常捕获
+	App.Use(recover.New())
+	// 设置限流器
+	SetHttpLimiter()
 }
