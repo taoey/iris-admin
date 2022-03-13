@@ -105,7 +105,7 @@ func ApiDownloadLimite(ctx iris.Context) {
 			ctx.ResponseWriter().Write(data[current : current+int64(takeTokenCount)])
 			current = current + int64(takeTokenCount)
 		} else {
-			ctx.ResponseWriter().CloseNotify()
+			ctx.ResponseWriter().EndResponse()
 			return
 		}
 	}
@@ -150,7 +150,7 @@ func ApiDownloadLimiteSleep(ctx iris.Context) {
 			ctx.ResponseWriter().Write(data[current : current+takeTokenCount])
 			current = current + takeTokenCount
 		} else {
-			ctx.ResponseWriter().CloseNotify()
+			ctx.ResponseWriter().EndResponse()
 			return
 		}
 	}
