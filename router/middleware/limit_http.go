@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 )
 
 var HttpLimithandler iris.Handler

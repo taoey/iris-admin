@@ -1,6 +1,6 @@
 package req
 
-import "github.com/kataras/iris"
+import "github.com/kataras/iris/v12"
 
 /**
  * @Description: 接收ctx中的json参数，转化为map

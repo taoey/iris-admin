@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 	"github.com/taoey/iris-admin/pkg/sys/req"
 	"github.com/taoey/iris-admin/pkg/sys/resp"
 )

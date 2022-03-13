@@ -1,7 +1,11 @@
 package router
 
 import (
-	"github.com/kataras/iris"
+	"fmt"
+
+	"github.com/getsentry/sentry-go"
+	sentryiris "github.com/getsentry/sentry-go/iris"
+	"github.com/kataras/iris/v12"
 	"github.com/taoey/iris-admin/pkg/api"
 	"github.com/taoey/iris-admin/pkg/service/test"
 	"github.com/taoey/iris-admin/router/middleware"
@@ -9,6 +13,14 @@ import (
 
 // 设置路由
 func SetRoutes(app *iris.Application) {
+
+	if err := sentry.Init(sentry.ClientOptions{
+		Dsn: "yout dsn",
+	}); err != nil {
+		fmt.Printf("Sentry initialization failed: %v\n", err)
+	}
+	app.Use(sentryiris.New(sentryiris.Options{}))
+
 	//主页
 	app.Get("/", api.Index)
 	app.Get("/hello_json", middleware.HttpLimithandler, api.IndexHelloJson)

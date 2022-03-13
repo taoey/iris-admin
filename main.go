@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/kataras/iris"
-	"github.com/kataras/iris/middleware/recover"
+	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/middleware/recover"
 	"github.com/taoey/iris-admin/pkg/sysinit"
 	"github.com/taoey/iris-admin/router"
 	"github.com/taoey/iris-admin/router/middleware"

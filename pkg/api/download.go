@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/juju/ratelimit"
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 )
 
 // 官方下载示例 https://www.studyiris.com/example/fileServer/sendFiles.html
