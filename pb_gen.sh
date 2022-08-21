@@ -1,5 +1,6 @@
 #!/bin/bash
 # protoc --go_out=. *.proto
+# ./pb_gen.sh user
 pakcage_name=${1}
 idl_in_path=./pkg/idl/message
 idl_out_path=./pkg/idl/pb_file

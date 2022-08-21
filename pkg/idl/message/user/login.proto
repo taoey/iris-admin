@@ -6,7 +6,3 @@ message LoginReq {
     string uname = 1;
     string password = 2;
 }
-
-message LoginResp {
-
-}
