@@ -7,7 +7,6 @@ import (
 	sentryiris "github.com/getsentry/sentry-go/iris"
 	"github.com/kataras/iris/v12"
 	"github.com/taoey/iris-admin/pkg/api"
-	"github.com/taoey/iris-admin/pkg/service/test"
 	"github.com/taoey/iris-admin/router/middleware"
 )
 
@@ -26,19 +25,23 @@ func SetRoutes(app *iris.Application) {
 	app.Get("/hello_json", middleware.HttpLimithandler, api.IndexHelloJson)
 
 	//根API
-	rootApi := app.Party("api/v1")
+	rootApi := app.Party("api")
 
 	// upload
 	rootApi.Post("/upload/ali_bill", iris.LimitRequestBodySize(5<<20), api.UploadAliBill)
 
+	// wx
+	rootApi.Get("/wx/event", HandlerWeb(api.NewWxCheckController))
+	rootApi.Post("/wx/event", HandlerWeb(api.NewWxCheckController))
+
 	//download
-	rootApi.Get("/download/demo1", api.ApiDownloadDemo1)
-	rootApi.Get("/download/demo2", api.ApiDownloadDemo2)
-	rootApi.Get("/download/demo3", api.ApiDownloadDemo3)
-	rootApi.Get("/download/demo4", api.ApiDownloadLimite)
-	rootApi.Get("/download/demo5", api.ApiDownloadLimiteSleep)
-	rootApi.Get("/download/demo6", api.ApiDownloadDemo6)
-	rootApi.Post("/test/map_parms", test.MapParmsHandler)
+	// rootApi.Get("/download/demo1", api.ApiDownloadDemo1)
+	// rootApi.Get("/download/demo2", api.ApiDownloadDemo2)
+	// rootApi.Get("/download/demo3", api.ApiDownloadDemo3)
+	// rootApi.Get("/download/demo4", api.ApiDownloadLimite)
+	// rootApi.Get("/download/demo5", api.ApiDownloadLimiteSleep)
+	// rootApi.Get("/download/demo6", api.ApiDownloadDemo6)
+	// rootApi.Post("/test/map_parms", test.MapParmsHandler)
 
 	// 用户登录登出
 	// rootApi.Post("/user/login", user.UserLoginHandler)
@@ -46,5 +49,5 @@ func SetRoutes(app *iris.Application) {
 	// rootApi.Get("/user/logout", user.UserLogoutHandler)
 
 	// 测试
-	rootApi.Get("/test/error/zero", test.ErrorHandler)
+	// rootApi.Get("/test/error/zero", test.ErrorHandler)
 }

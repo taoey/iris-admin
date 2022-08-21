@@ -1,0 +1,15 @@
+syntax = "proto3";
+package wx;
+option go_package = ".;wx";
+
+// 协议地址：https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html
+message WxCheckRequest {
+    string signature = 1;
+    string timestamp = 2;
+    string nonce = 3;
+    string echostr = 4;
+}
+
+message WxCheckResponse {
+    string echostr = 1;
+}

@@ -22,3 +22,20 @@ func TestName(t *testing.T) {
 
 	fmt.Println(data[3:4])
 }
+
+type people struct {
+	Name string
+	Age  int
+}
+
+type student struct {
+	people
+	Name string
+}
+
+func Test02(t *testing.T) {
+	a := student{
+		people{Name: "tao", Age: 12}, "s1",
+	}
+	fmt.Println(a.people.Name)
+}
