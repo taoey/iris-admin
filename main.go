@@ -5,6 +5,7 @@ import (
 
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/middleware/recover"
+
 	"github.com/taoey/iris-admin/pkg/sysinit"
 	"github.com/taoey/iris-admin/router"
 	"github.com/taoey/iris-admin/router/middleware"
@@ -12,7 +13,7 @@ import (
 
 var App *iris.Application
 
-//程序入口
+// 程序入口
 func main() {
 	// 初始化App
 	App = iris.New()

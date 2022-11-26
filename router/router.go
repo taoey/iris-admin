@@ -1,11 +1,9 @@
 package router
 
 import (
-	"fmt"
-
-	"github.com/getsentry/sentry-go"
-	sentryiris "github.com/getsentry/sentry-go/iris"
 	"github.com/kataras/iris/v12"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+
 	"github.com/taoey/iris-admin/pkg/api"
 	"github.com/taoey/iris-admin/router/middleware"
 )
@@ -13,16 +11,19 @@ import (
 // 设置路由
 func SetRoutes(app *iris.Application) {
 
-	if err := sentry.Init(sentry.ClientOptions{
-		Dsn: "yout dsn",
-	}); err != nil {
-		fmt.Printf("Sentry initialization failed: %v\n", err)
-	}
-	app.Use(sentryiris.New(sentryiris.Options{}))
+	// if err := sentry.Init(sentry.ClientOptions{
+	// 	Dsn: "yout dsn",
+	// }); err != nil {
+	// 	fmt.Printf("Sentry initialization failed: %v\n", err)
+	// }
+	// app.Use(sentryiris.New(sentryiris.Options{}))
 
 	//主页
 	app.Get("/", api.Index)
 	app.Get("/hello_json", middleware.HttpLimithandler, api.IndexHelloJson)
+
+	app.Get("/metrics", iris.FromStd(promhttp.Handler()))
+	// sysinit.RecordMetrics() // prometheus-metrics 测试
 
 	//根API
 	rootApi := app.Party("api")
