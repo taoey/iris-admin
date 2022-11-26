@@ -27,7 +27,7 @@ require (
 	github.com/aymerick/raymond v2.0.3-0.20180322193309-b565731e1464+incompatible // indirect
 	github.com/eknkc/amber v0.0.0-20171010120322-cdade1c07385 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
-	github.com/google/go-cmp v0.5.6 // indirect
+	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
 	github.com/iris-contrib/jade v1.1.4 // indirect
@@ -45,7 +45,6 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.18 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
@@ -59,7 +58,7 @@ require (
 	golang.org/x/sys v0.0.0-20220310020820-b874c991c1a5 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220224211638-0e9765cccd65 // indirect
-	gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect

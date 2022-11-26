@@ -1,6 +1,6 @@
 # 服务器配置
 server:
-  url: :80
+  url: :8889
 
 # 热部署
 
@@ -23,3 +23,7 @@ logger:
   level: DEBUG #开发环境需:DEBUG ; 生产环境：INFO
   style: console  # console / json
   path: /Users/tao/Documents/temp/hotsearch.log
+
+# 微信公众号
+wx_gzh:
+  id: 1221
