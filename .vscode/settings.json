@@ -1,3 +1,5 @@
 {
-    "go.testFlags": ["-v"]
+    "go.testFlags": ["-v"],
+    "go.goroot": "/root/soft/go",
+    "go.gopath": "/root/soft/gopath",
 }

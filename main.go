@@ -23,7 +23,7 @@ func main() {
 	sysinit.InitLogger()
 
 	//sysinit.InitMongo()
-	//sysinit.InitQuartz()
+	sysinit.InitCron()
 	//sysinit.InitMysql()
 
 	router.SetRoutes(App)

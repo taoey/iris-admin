@@ -13,3 +13,5 @@
 
 /vendor/**
 /.idea/**
+*.html
+*.tar.gz

@@ -43,3 +43,15 @@ gowatch -p ./main.go
 
 ### 注释插件
 Goanno
+
+
+
+### 配置prometheus
+docker run \
+    -p 8797:9090 \
+    -v /root/soft/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+
+docker run -d --name grafana  -p 8795:3000 grafana/grafana grafana
+120.46.173.6:8795
