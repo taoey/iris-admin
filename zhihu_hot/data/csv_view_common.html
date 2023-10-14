@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Viewer</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>zhihu-hot</h1>
+    <table id="zhihu">
+        <!-- CSV data will be inserted here -->
+    </table>
+    <script>
+        // Load and display CSV data
+        fetch('output.csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                const table = document.getElementById('zhihu');
+
+                rows.forEach(row => {
+                    const cells = row.split('|||');
+                    const newRow = document.createElement('tr');
+
+                    cells.forEach(cell => {
+                        const newCell = document.createElement('td');
+                        newCell.textContent = cell;
+                        newRow.appendChild(newCell);
+                    });
+
+                    table.appendChild(newRow);
+                });
+            })
+            .catch(error => console.error('Error loading CSV:', error));
+    </script>
+</body>
+</html>
