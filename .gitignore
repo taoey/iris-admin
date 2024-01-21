@@ -13,3 +13,6 @@
 
 /vendor/**
 /.idea/**
+*.html
+.history
+.DS_Store
